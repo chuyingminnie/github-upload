@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="applyrental">
+        <EntityType Name="applyforrental">
           <Key>
             <PropertyRef Name="applyRentalID" />
           </Key>
@@ -17,18 +17,6 @@
           <Property Name="month" Type="int" Nullable="false" />
           <Property Name="approve" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
-        <EntityType Name="attendance">
-          <Key>
-            <PropertyRef Name="attendanceID" />
-          </Key>
-          <Property Name="attendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="staffID" Type="int" Nullable="false" />
-          <Property Name="date" Type="date" Nullable="false" />
-          <Property Name="basicPunchIn" Type="time" Precision="0" Nullable="false" />
-          <Property Name="basicPunchOut" Type="time" Precision="0" Nullable="false" />
-          <Property Name="punchIn" Type="time" Precision="0" Nullable="false" />
-          <Property Name="punchOut" Type="time" Precision="0" Nullable="false" />
-        </EntityType>
         <EntityType Name="customer">
           <Key>
             <PropertyRef Name="custID" />
@@ -36,7 +24,7 @@
           <Property Name="custID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="firstname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="lastname" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="phonenum" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="phonenumber" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -99,8 +87,7 @@
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="salary" Type="int" Nullable="false" />
-          <Property Name="basicPunchIn" Type="time" Precision="0" Nullable="false" />
-          <Property Name="basicPunchOut" Type="time" Precision="0" Nullable="false" />
+          <Property Name="shop" Type="varchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="staff_attendance">
           <Key>
@@ -108,7 +95,11 @@
           </Key>
           <Property Name="staff_attendance_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="staffID" Type="int" Nullable="false" />
-          <Property Name="attendanceID" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="basicPunchIn" Type="time" Precision="0" Nullable="false" />
+          <Property Name="basicPunchOut" Type="time" Precision="0" Nullable="false" />
+          <Property Name="punchIn" Type="time" Precision="0" />
+          <Property Name="punchOut" Type="time" Precision="0" />
         </EntityType>
         <EntityType Name="tenant">
           <Key>
@@ -121,26 +112,26 @@
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="applyrental_ibfk_1">
+        <Association Name="applyforrental_ibfk_1">
           <End Role="tenant" Type="Self.tenant" Multiplicity="1" />
-          <End Role="applyrental" Type="Self.applyrental" Multiplicity="*" />
+          <End Role="applyforrental" Type="Self.applyforrental" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tenant">
               <PropertyRef Name="tenantID" />
             </Principal>
-            <Dependent Role="applyrental">
+            <Dependent Role="applyforrental">
               <PropertyRef Name="tenantID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="applyrental_ibfk_2">
+        <Association Name="applyforrental_ibfk_2">
           <End Role="showcase" Type="Self.showcase" Multiplicity="1" />
-          <End Role="applyrental" Type="Self.applyrental" Multiplicity="*" />
+          <End Role="applyforrental" Type="Self.applyforrental" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="showcase">
               <PropertyRef Name="showcaseID" />
             </Principal>
-            <Dependent Role="applyrental">
+            <Dependent Role="applyforrental">
               <PropertyRef Name="showcaseID" />
             </Dependent>
           </ReferentialConstraint>
@@ -217,21 +208,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="staff_attendance_ibfk_2">
-          <End Role="attendance" Type="Self.attendance" Multiplicity="1" />
-          <End Role="staff_attendance" Type="Self.staff_attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="attendance">
-              <PropertyRef Name="attendanceID" />
-            </Principal>
-            <Dependent Role="staff_attendance">
-              <PropertyRef Name="attendanceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ModelStoreContainer">
-          <EntitySet Name="applyrental" EntityType="Self.applyrental" Schema="sdp-project" store:Type="Tables" />
-          <EntitySet Name="attendance" EntityType="Self.attendance" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="applyforrental" EntityType="Self.applyforrental" Schema="sdp-project" store:Type="Tables" />
           <EntitySet Name="customer" EntityType="Self.customer" Schema="sdp-project" store:Type="Tables" />
           <EntitySet Name="custorder" EntityType="Self.custorder" Schema="sdp-project" store:Type="Tables" />
           <EntitySet Name="orderproduct" EntityType="Self.orderproduct" Schema="sdp-project" store:Type="Tables" />
@@ -241,13 +219,13 @@
           <EntitySet Name="staff" EntityType="Self.staff" Schema="sdp-project" store:Type="Tables" />
           <EntitySet Name="staff_attendance" EntityType="Self.staff_attendance" Schema="sdp-project" store:Type="Tables" />
           <EntitySet Name="tenant" EntityType="Self.tenant" Schema="sdp-project" store:Type="Tables" />
-          <AssociationSet Name="applyrental_ibfk_1" Association="Self.applyrental_ibfk_1">
+          <AssociationSet Name="applyforrental_ibfk_1" Association="Self.applyforrental_ibfk_1">
             <End Role="tenant" EntitySet="tenant" />
-            <End Role="applyrental" EntitySet="applyrental" />
+            <End Role="applyforrental" EntitySet="applyforrental" />
           </AssociationSet>
-          <AssociationSet Name="applyrental_ibfk_2" Association="Self.applyrental_ibfk_2">
+          <AssociationSet Name="applyforrental_ibfk_2" Association="Self.applyforrental_ibfk_2">
             <End Role="showcase" EntitySet="showcase" />
-            <End Role="applyrental" EntitySet="applyrental" />
+            <End Role="applyforrental" EntitySet="applyforrental" />
           </AssociationSet>
           <AssociationSet Name="custorder_ibfk_1" Association="Self.custorder_ibfk_1">
             <End Role="customer" EntitySet="customer" />
@@ -273,17 +251,13 @@
             <End Role="staff" EntitySet="staff" />
             <End Role="staff_attendance" EntitySet="staff_attendance" />
           </AssociationSet>
-          <AssociationSet Name="staff_attendance_ibfk_2" Association="Self.staff_attendance_ibfk_2">
-            <End Role="attendance" EntitySet="attendance" />
-            <End Role="staff_attendance" EntitySet="staff_attendance" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="applyrental">
+        <EntityType Name="applyforrental">
           <Key>
             <PropertyRef Name="applyRentalID" />
           </Key>
@@ -294,21 +268,8 @@
           <Property Name="rentStartDate" Type="DateTime" Nullable="false" />
           <Property Name="month" Type="Int32" Nullable="false" />
           <Property Name="approve" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tenant" Relationship="Self.applyrental_ibfk_1" FromRole="applyrental" ToRole="tenant" />
-          <NavigationProperty Name="showcase" Relationship="Self.applyrental_ibfk_2" FromRole="applyrental" ToRole="showcase" />
-        </EntityType>
-        <EntityType Name="attendance">
-          <Key>
-            <PropertyRef Name="attendanceID" />
-          </Key>
-          <Property Name="attendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="staffID" Type="Int32" Nullable="false" />
-          <Property Name="date" Type="DateTime" Nullable="false" />
-          <Property Name="basicPunchIn" Type="Time" Nullable="false" />
-          <Property Name="basicPunchOut" Type="Time" Nullable="false" />
-          <Property Name="punchIn" Type="Time" Nullable="false" />
-          <Property Name="punchOut" Type="Time" Nullable="false" />
-          <NavigationProperty Name="staff_attendance" Relationship="Self.staff_attendance_ibfk_2" FromRole="attendance" ToRole="staff_attendance" />
+          <NavigationProperty Name="tenant" Relationship="Self.applyforrental_ibfk_1" FromRole="applyforrental" ToRole="tenant" />
+          <NavigationProperty Name="showcase" Relationship="Self.applyforrental_ibfk_2" FromRole="applyforrental" ToRole="showcase" />
         </EntityType>
         <EntityType Name="customer">
           <Key>
@@ -317,7 +278,7 @@
           <Property Name="custID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="phonenum" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phonenumber" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="custorders" Relationship="Self.custorder_ibfk_1" FromRole="customer" ToRole="custorder" />
@@ -363,7 +324,7 @@
           <Property Name="rentCost" Type="Int32" Nullable="false" />
           <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="location" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="applyrentals" Relationship="Self.applyrental_ibfk_2" FromRole="showcase" ToRole="applyrental" />
+          <NavigationProperty Name="applyforrentals" Relationship="Self.applyforrental_ibfk_2" FromRole="showcase" ToRole="applyforrental" />
           <NavigationProperty Name="showcase_product" Relationship="Self.showcase_product_ibfk_2" FromRole="showcase" ToRole="showcase_product" />
         </EntityType>
         <EntityType Name="showcase_product">
@@ -391,8 +352,7 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="salary" Type="Int32" Nullable="false" />
-          <Property Name="basicPunchIn" Type="Time" Nullable="false" />
-          <Property Name="basicPunchOut" Type="Time" Nullable="false" />
+          <Property Name="shop" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="staff_attendance" Relationship="Self.staff_attendance_ibfk_1" FromRole="staff" ToRole="staff_attendance" />
         </EntityType>
         <EntityType Name="staff_attendance">
@@ -401,8 +361,11 @@
           </Key>
           <Property Name="staff_attendance_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="staffID" Type="Int32" Nullable="false" />
-          <Property Name="attendanceID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="attendance" Relationship="Self.staff_attendance_ibfk_2" FromRole="staff_attendance" ToRole="attendance" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="basicPunchIn" Type="Time" Nullable="false" />
+          <Property Name="basicPunchOut" Type="Time" Nullable="false" />
+          <Property Name="punchIn" Type="Time" />
+          <Property Name="punchOut" Type="Time" />
           <NavigationProperty Name="staff" Relationship="Self.staff_attendance_ibfk_1" FromRole="staff_attendance" ToRole="staff" />
         </EntityType>
         <EntityType Name="tenant">
@@ -415,41 +378,29 @@
           <Property Name="phonenumber" Type="Int32" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="applyrentals" Relationship="Self.applyrental_ibfk_1" FromRole="tenant" ToRole="applyrental" />
+          <NavigationProperty Name="applyforrentals" Relationship="Self.applyforrental_ibfk_1" FromRole="tenant" ToRole="applyforrental" />
         </EntityType>
-        <Association Name="applyrental_ibfk_1">
+        <Association Name="applyforrental_ibfk_1">
           <End Role="tenant" Type="Self.tenant" Multiplicity="1" />
-          <End Role="applyrental" Type="Self.applyrental" Multiplicity="*" />
+          <End Role="applyforrental" Type="Self.applyforrental" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tenant">
               <PropertyRef Name="tenantID" />
             </Principal>
-            <Dependent Role="applyrental">
+            <Dependent Role="applyforrental">
               <PropertyRef Name="tenantID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="applyrental_ibfk_2">
+        <Association Name="applyforrental_ibfk_2">
           <End Role="showcase" Type="Self.showcase" Multiplicity="1" />
-          <End Role="applyrental" Type="Self.applyrental" Multiplicity="*" />
+          <End Role="applyforrental" Type="Self.applyforrental" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="showcase">
               <PropertyRef Name="showcaseID" />
             </Principal>
-            <Dependent Role="applyrental">
+            <Dependent Role="applyforrental">
               <PropertyRef Name="showcaseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="staff_attendance_ibfk_2">
-          <End Role="attendance" Type="Self.attendance" Multiplicity="1" />
-          <End Role="staff_attendance" Type="Self.staff_attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="attendance">
-              <PropertyRef Name="attendanceID" />
-            </Principal>
-            <Dependent Role="staff_attendance">
-              <PropertyRef Name="attendanceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -526,8 +477,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="applyrentals" EntityType="Self.applyrental" />
-          <EntitySet Name="attendances" EntityType="Self.attendance" />
+          <EntitySet Name="applyforrentals" EntityType="Self.applyforrental" />
           <EntitySet Name="customers" EntityType="Self.customer" />
           <EntitySet Name="custorders" EntityType="Self.custorder" />
           <EntitySet Name="orderproducts" EntityType="Self.orderproduct" />
@@ -537,17 +487,13 @@
           <EntitySet Name="staffs" EntityType="Self.staff" />
           <EntitySet Name="staff_attendance" EntityType="Self.staff_attendance" />
           <EntitySet Name="tenants" EntityType="Self.tenant" />
-          <AssociationSet Name="applyrental_ibfk_1" Association="Self.applyrental_ibfk_1">
+          <AssociationSet Name="applyforrental_ibfk_1" Association="Self.applyforrental_ibfk_1">
             <End Role="tenant" EntitySet="tenants" />
-            <End Role="applyrental" EntitySet="applyrentals" />
+            <End Role="applyforrental" EntitySet="applyforrentals" />
           </AssociationSet>
-          <AssociationSet Name="applyrental_ibfk_2" Association="Self.applyrental_ibfk_2">
+          <AssociationSet Name="applyforrental_ibfk_2" Association="Self.applyforrental_ibfk_2">
             <End Role="showcase" EntitySet="showcases" />
-            <End Role="applyrental" EntitySet="applyrentals" />
-          </AssociationSet>
-          <AssociationSet Name="staff_attendance_ibfk_2" Association="Self.staff_attendance_ibfk_2">
-            <End Role="attendance" EntitySet="attendances" />
-            <End Role="staff_attendance" EntitySet="staff_attendance" />
+            <End Role="applyforrental" EntitySet="applyforrentals" />
           </AssociationSet>
           <AssociationSet Name="custorder_ibfk_1" Association="Self.custorder_ibfk_1">
             <End Role="customer" EntitySet="customers" />
@@ -580,9 +526,9 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="applyrentals">
-            <EntityTypeMapping TypeName="Model.applyrental">
-              <MappingFragment StoreEntitySet="applyrental">
+          <EntitySetMapping Name="applyforrentals">
+            <EntityTypeMapping TypeName="Model.applyforrental">
+              <MappingFragment StoreEntitySet="applyforrental">
                 <ScalarProperty Name="applyRentalID" ColumnName="applyRentalID" />
                 <ScalarProperty Name="applyDate" ColumnName="applyDate" />
                 <ScalarProperty Name="showcaseID" ColumnName="showcaseID" />
@@ -593,26 +539,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="attendances">
-            <EntityTypeMapping TypeName="Model.attendance">
-              <MappingFragment StoreEntitySet="attendance">
-                <ScalarProperty Name="attendanceID" ColumnName="attendanceID" />
-                <ScalarProperty Name="staffID" ColumnName="staffID" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="basicPunchIn" ColumnName="basicPunchIn" />
-                <ScalarProperty Name="basicPunchOut" ColumnName="basicPunchOut" />
-                <ScalarProperty Name="punchIn" ColumnName="punchIn" />
-                <ScalarProperty Name="punchOut" ColumnName="punchOut" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="customers">
             <EntityTypeMapping TypeName="Model.customer">
               <MappingFragment StoreEntitySet="customer">
                 <ScalarProperty Name="custID" ColumnName="custID" />
                 <ScalarProperty Name="firstname" ColumnName="firstname" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
-                <ScalarProperty Name="phonenum" ColumnName="phonenum" />
+                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
               </MappingFragment>
@@ -681,8 +614,7 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="salary" ColumnName="salary" />
-                <ScalarProperty Name="basicPunchIn" ColumnName="basicPunchIn" />
-                <ScalarProperty Name="basicPunchOut" ColumnName="basicPunchOut" />
+                <ScalarProperty Name="shop" ColumnName="shop" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -691,7 +623,11 @@
               <MappingFragment StoreEntitySet="staff_attendance">
                 <ScalarProperty Name="staff_attendance_ID" ColumnName="staff_attendance_ID" />
                 <ScalarProperty Name="staffID" ColumnName="staffID" />
-                <ScalarProperty Name="attendanceID" ColumnName="attendanceID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="basicPunchIn" ColumnName="basicPunchIn" />
+                <ScalarProperty Name="basicPunchOut" ColumnName="basicPunchOut" />
+                <ScalarProperty Name="punchIn" ColumnName="punchIn" />
+                <ScalarProperty Name="punchOut" ColumnName="punchOut" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

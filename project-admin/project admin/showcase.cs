@@ -16,7 +16,7 @@ namespace project_admin
     {
         public showcase()
         {
-            this.applyrentals = new HashSet<applyrental>();
+            this.applyforrentals = new HashSet<applyforrental>();
             this.showcase_product = new HashSet<showcase_product>();
         }
     
@@ -25,7 +25,7 @@ namespace project_admin
         public string status { get; set; }
         public string location { get; set; }
     
-        public virtual ICollection<applyrental> applyrentals { get; set; }
+        public virtual ICollection<applyforrental> applyforrentals { get; set; }
         public virtual ICollection<showcase_product> showcase_product { get; set; }
     }
 }

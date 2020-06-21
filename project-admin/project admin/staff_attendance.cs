@@ -16,9 +16,12 @@ namespace project_admin
     {
         public int staff_attendance_ID { get; set; }
         public int staffID { get; set; }
-        public int attendanceID { get; set; }
+        public System.DateTime date { get; set; }
+        public System.TimeSpan basicPunchIn { get; set; }
+        public System.TimeSpan basicPunchOut { get; set; }
+        public Nullable<System.TimeSpan> punchIn { get; set; }
+        public Nullable<System.TimeSpan> punchOut { get; set; }
     
-        public virtual attendance attendance { get; set; }
         public virtual staff staff { get; set; }
     }
 }

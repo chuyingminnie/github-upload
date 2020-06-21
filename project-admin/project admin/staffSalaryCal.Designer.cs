@@ -184,7 +184,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Algerian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label4.Location = new System.Drawing.Point(43, 231);
+            this.label4.Location = new System.Drawing.Point(46, 221);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(215, 21);
             this.label4.TabIndex = 66;
@@ -210,11 +210,11 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(47, 268);
+            this.textBox2.Location = new System.Drawing.Point(47, 258);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox2.Size = new System.Drawing.Size(274, 177);
+            this.textBox2.Size = new System.Drawing.Size(285, 215);
             this.textBox2.TabIndex = 69;
             // 
             // label6
@@ -222,7 +222,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Algerian", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label6.Location = new System.Drawing.Point(373, 231);
+            this.label6.Location = new System.Drawing.Point(371, 221);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(173, 21);
             this.label6.TabIndex = 70;
@@ -230,11 +230,11 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(377, 268);
+            this.textBox3.Location = new System.Drawing.Point(375, 258);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(274, 177);
+            this.textBox3.Size = new System.Drawing.Size(284, 215);
             this.textBox3.TabIndex = 71;
             // 
             // btnClear

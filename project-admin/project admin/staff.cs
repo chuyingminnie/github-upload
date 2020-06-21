@@ -28,8 +28,7 @@ namespace project_admin
         public string email { get; set; }
         public string password { get; set; }
         public int salary { get; set; }
-        public System.TimeSpan basicPunchIn { get; set; }
-        public System.TimeSpan basicPunchOut { get; set; }
+        public string shop { get; set; }
     
         public virtual ICollection<staff_attendance> staff_attendance { get; set; }
     }

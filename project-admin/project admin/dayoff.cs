@@ -12,20 +12,12 @@ namespace project_admin
     using System;
     using System.Collections.Generic;
     
-    public partial class customer
+    public partial class dayoff
     {
-        public customer()
-        {
-            this.custorders = new HashSet<custorder>();
-        }
+        public int dayoffID { get; set; }
+        public int staff_dayoff_ID { get; set; }
+        public System.DateTime date { get; set; }
     
-        public int custID { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public string phonenumber { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-    
-        public virtual ICollection<custorder> custorders { get; set; }
+        public virtual staff_dayoff staff_dayoff { get; set; }
     }
 }

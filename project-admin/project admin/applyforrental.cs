@@ -12,20 +12,17 @@ namespace project_admin
     using System;
     using System.Collections.Generic;
     
-    public partial class customer
+    public partial class applyforrental
     {
-        public customer()
-        {
-            this.custorders = new HashSet<custorder>();
-        }
+        public int applyRentalID { get; set; }
+        public System.DateTime applyDate { get; set; }
+        public int showcaseID { get; set; }
+        public int tenantID { get; set; }
+        public System.DateTime rentStartDate { get; set; }
+        public int month { get; set; }
+        public string approve { get; set; }
     
-        public int custID { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public string phonenumber { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-    
-        public virtual ICollection<custorder> custorders { get; set; }
+        public virtual tenant tenant { get; set; }
+        public virtual showcase showcase { get; set; }
     }
 }

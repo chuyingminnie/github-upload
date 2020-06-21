@@ -16,7 +16,7 @@ namespace project_admin
     {
         public tenant()
         {
-            this.applyrentals = new HashSet<applyrental>();
+            this.applyforrentals = new HashSet<applyforrental>();
         }
     
         public int tenantID { get; set; }
@@ -26,6 +26,6 @@ namespace project_admin
         public string email { get; set; }
         public string password { get; set; }
     
-        public virtual ICollection<applyrental> applyrentals { get; set; }
+        public virtual ICollection<applyforrental> applyforrentals { get; set; }
     }
 }

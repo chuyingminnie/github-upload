@@ -25,8 +25,7 @@ namespace project_admin
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<applyrental> applyrentals { get; set; }
-        public DbSet<attendance> attendances { get; set; }
+        public DbSet<applyforrental> applyforrentals { get; set; }
         public DbSet<customer> customers { get; set; }
         public DbSet<custorder> custorders { get; set; }
         public DbSet<orderproduct> orderproducts { get; set; }
