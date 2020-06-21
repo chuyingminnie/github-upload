@@ -1,0 +1,733 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="applyrental">
+          <Key>
+            <PropertyRef Name="applyRentalID" />
+          </Key>
+          <Property Name="applyRentalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="applyDate" Type="date" Nullable="false" />
+          <Property Name="showcaseID" Type="int" Nullable="false" />
+          <Property Name="tenantID" Type="int" Nullable="false" />
+          <Property Name="rentStartDate" Type="date" Nullable="false" />
+          <Property Name="month" Type="int" Nullable="false" />
+          <Property Name="approve" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="attendance">
+          <Key>
+            <PropertyRef Name="attendanceID" />
+          </Key>
+          <Property Name="attendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffID" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="basicPunchIn" Type="time" Precision="0" Nullable="false" />
+          <Property Name="basicPunchOut" Type="time" Precision="0" Nullable="false" />
+          <Property Name="punchIn" Type="time" Precision="0" Nullable="false" />
+          <Property Name="punchOut" Type="time" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="custID" />
+          </Key>
+          <Property Name="custID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phonenum" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="custorder">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="custID" Type="int" Nullable="false" />
+          <Property Name="orderDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orderproduct">
+          <Key>
+            <PropertyRef Name="order_product_ID" />
+          </Key>
+          <Property Name="order_product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderID" Type="int" Nullable="false" />
+          <Property Name="productID" Type="int" Nullable="false" />
+          <Property Name="orderQTY" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="unitPrice" Type="int" Nullable="false" />
+          <Property Name="remark" Type="text" />
+          <Property Name="description" Type="text" />
+        </EntityType>
+        <EntityType Name="showcase">
+          <Key>
+            <PropertyRef Name="showcaseID" />
+          </Key>
+          <Property Name="showcaseID" Type="int" Nullable="false" />
+          <Property Name="rentCost" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="showcase_product">
+          <Key>
+            <PropertyRef Name="showcase_product_ID" />
+          </Key>
+          <Property Name="showcase_product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="showcaseID" Type="int" Nullable="false" />
+          <Property Name="productID" Type="int" Nullable="false" />
+          <Property Name="stockInDate" Type="date" Nullable="false" />
+          <Property Name="stockInQty" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="staffID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fulltime_parttime" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="staff_admin" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phonenumber" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="salary" Type="int" Nullable="false" />
+          <Property Name="basicPunchIn" Type="time" Precision="0" Nullable="false" />
+          <Property Name="basicPunchOut" Type="time" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staff_attendance">
+          <Key>
+            <PropertyRef Name="staff_attendance_ID" />
+          </Key>
+          <Property Name="staff_attendance_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffID" Type="int" Nullable="false" />
+          <Property Name="attendanceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tenant">
+          <Key>
+            <PropertyRef Name="tenantID" />
+          </Key>
+          <Property Name="tenantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phonenumber" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="applyrental_ibfk_1">
+          <End Role="tenant" Type="Self.tenant" Multiplicity="1" />
+          <End Role="applyrental" Type="Self.applyrental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tenant">
+              <PropertyRef Name="tenantID" />
+            </Principal>
+            <Dependent Role="applyrental">
+              <PropertyRef Name="tenantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="applyrental_ibfk_2">
+          <End Role="showcase" Type="Self.showcase" Multiplicity="1" />
+          <End Role="applyrental" Type="Self.applyrental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="showcase">
+              <PropertyRef Name="showcaseID" />
+            </Principal>
+            <Dependent Role="applyrental">
+              <PropertyRef Name="showcaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="custorder_ibfk_1">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="custorder" Type="Self.custorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="custID" />
+            </Principal>
+            <Dependent Role="custorder">
+              <PropertyRef Name="custID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="orderproduct_ibfk_2">
+          <End Role="custorder" Type="Self.custorder" Multiplicity="1" />
+          <End Role="orderproduct" Type="Self.orderproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="custorder">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="orderproduct">
+              <PropertyRef Name="orderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="orderproduct_ibfk_3">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="orderproduct" Type="Self.orderproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="orderproduct">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="showcase_product_ibfk_2">
+          <End Role="showcase" Type="Self.showcase" Multiplicity="1" />
+          <End Role="showcase_product" Type="Self.showcase_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="showcase">
+              <PropertyRef Name="showcaseID" />
+            </Principal>
+            <Dependent Role="showcase_product">
+              <PropertyRef Name="showcaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="showcase_product_ibfk_3">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="showcase_product" Type="Self.showcase_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="showcase_product">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="staff_attendance_ibfk_1">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="staff_attendance" Type="Self.staff_attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staffID" />
+            </Principal>
+            <Dependent Role="staff_attendance">
+              <PropertyRef Name="staffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="staff_attendance_ibfk_2">
+          <End Role="attendance" Type="Self.attendance" Multiplicity="1" />
+          <End Role="staff_attendance" Type="Self.staff_attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attendance">
+              <PropertyRef Name="attendanceID" />
+            </Principal>
+            <Dependent Role="staff_attendance">
+              <PropertyRef Name="attendanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="applyrental" EntityType="Self.applyrental" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="attendance" EntityType="Self.attendance" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="custorder" EntityType="Self.custorder" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="orderproduct" EntityType="Self.orderproduct" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="showcase" EntityType="Self.showcase" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="showcase_product" EntityType="Self.showcase_product" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="staff_attendance" EntityType="Self.staff_attendance" Schema="sdp-project" store:Type="Tables" />
+          <EntitySet Name="tenant" EntityType="Self.tenant" Schema="sdp-project" store:Type="Tables" />
+          <AssociationSet Name="applyrental_ibfk_1" Association="Self.applyrental_ibfk_1">
+            <End Role="tenant" EntitySet="tenant" />
+            <End Role="applyrental" EntitySet="applyrental" />
+          </AssociationSet>
+          <AssociationSet Name="applyrental_ibfk_2" Association="Self.applyrental_ibfk_2">
+            <End Role="showcase" EntitySet="showcase" />
+            <End Role="applyrental" EntitySet="applyrental" />
+          </AssociationSet>
+          <AssociationSet Name="custorder_ibfk_1" Association="Self.custorder_ibfk_1">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="custorder" EntitySet="custorder" />
+          </AssociationSet>
+          <AssociationSet Name="orderproduct_ibfk_2" Association="Self.orderproduct_ibfk_2">
+            <End Role="custorder" EntitySet="custorder" />
+            <End Role="orderproduct" EntitySet="orderproduct" />
+          </AssociationSet>
+          <AssociationSet Name="orderproduct_ibfk_3" Association="Self.orderproduct_ibfk_3">
+            <End Role="product" EntitySet="product" />
+            <End Role="orderproduct" EntitySet="orderproduct" />
+          </AssociationSet>
+          <AssociationSet Name="showcase_product_ibfk_2" Association="Self.showcase_product_ibfk_2">
+            <End Role="showcase" EntitySet="showcase" />
+            <End Role="showcase_product" EntitySet="showcase_product" />
+          </AssociationSet>
+          <AssociationSet Name="showcase_product_ibfk_3" Association="Self.showcase_product_ibfk_3">
+            <End Role="product" EntitySet="product" />
+            <End Role="showcase_product" EntitySet="showcase_product" />
+          </AssociationSet>
+          <AssociationSet Name="staff_attendance_ibfk_1" Association="Self.staff_attendance_ibfk_1">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="staff_attendance" EntitySet="staff_attendance" />
+          </AssociationSet>
+          <AssociationSet Name="staff_attendance_ibfk_2" Association="Self.staff_attendance_ibfk_2">
+            <End Role="attendance" EntitySet="attendance" />
+            <End Role="staff_attendance" EntitySet="staff_attendance" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="applyrental">
+          <Key>
+            <PropertyRef Name="applyRentalID" />
+          </Key>
+          <Property Name="applyRentalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="applyDate" Type="DateTime" Nullable="false" />
+          <Property Name="showcaseID" Type="Int32" Nullable="false" />
+          <Property Name="tenantID" Type="Int32" Nullable="false" />
+          <Property Name="rentStartDate" Type="DateTime" Nullable="false" />
+          <Property Name="month" Type="Int32" Nullable="false" />
+          <Property Name="approve" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tenant" Relationship="Self.applyrental_ibfk_1" FromRole="applyrental" ToRole="tenant" />
+          <NavigationProperty Name="showcase" Relationship="Self.applyrental_ibfk_2" FromRole="applyrental" ToRole="showcase" />
+        </EntityType>
+        <EntityType Name="attendance">
+          <Key>
+            <PropertyRef Name="attendanceID" />
+          </Key>
+          <Property Name="attendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffID" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="basicPunchIn" Type="Time" Nullable="false" />
+          <Property Name="basicPunchOut" Type="Time" Nullable="false" />
+          <Property Name="punchIn" Type="Time" Nullable="false" />
+          <Property Name="punchOut" Type="Time" Nullable="false" />
+          <NavigationProperty Name="staff_attendance" Relationship="Self.staff_attendance_ibfk_2" FromRole="attendance" ToRole="staff_attendance" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="custID" />
+          </Key>
+          <Property Name="custID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phonenum" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="custorders" Relationship="Self.custorder_ibfk_1" FromRole="customer" ToRole="custorder" />
+        </EntityType>
+        <EntityType Name="custorder">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="custID" Type="Int32" Nullable="false" />
+          <Property Name="orderDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="Self.custorder_ibfk_1" FromRole="custorder" ToRole="customer" />
+          <NavigationProperty Name="orderproducts" Relationship="Self.orderproduct_ibfk_2" FromRole="custorder" ToRole="orderproduct" />
+        </EntityType>
+        <EntityType Name="orderproduct">
+          <Key>
+            <PropertyRef Name="order_product_ID" />
+          </Key>
+          <Property Name="order_product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderID" Type="Int32" Nullable="false" />
+          <Property Name="productID" Type="Int32" Nullable="false" />
+          <Property Name="orderQTY" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="custorder" Relationship="Self.orderproduct_ibfk_2" FromRole="orderproduct" ToRole="custorder" />
+          <NavigationProperty Name="product" Relationship="Self.orderproduct_ibfk_3" FromRole="orderproduct" ToRole="product" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="unitPrice" Type="Int32" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="orderproducts" Relationship="Self.orderproduct_ibfk_3" FromRole="product" ToRole="orderproduct" />
+          <NavigationProperty Name="showcase_product" Relationship="Self.showcase_product_ibfk_3" FromRole="product" ToRole="showcase_product" />
+        </EntityType>
+        <EntityType Name="showcase">
+          <Key>
+            <PropertyRef Name="showcaseID" />
+          </Key>
+          <Property Name="showcaseID" Type="Int32" Nullable="false" />
+          <Property Name="rentCost" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="applyrentals" Relationship="Self.applyrental_ibfk_2" FromRole="showcase" ToRole="applyrental" />
+          <NavigationProperty Name="showcase_product" Relationship="Self.showcase_product_ibfk_2" FromRole="showcase" ToRole="showcase_product" />
+        </EntityType>
+        <EntityType Name="showcase_product">
+          <Key>
+            <PropertyRef Name="showcase_product_ID" />
+          </Key>
+          <Property Name="showcase_product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="showcaseID" Type="Int32" Nullable="false" />
+          <Property Name="productID" Type="Int32" Nullable="false" />
+          <Property Name="stockInDate" Type="DateTime" Nullable="false" />
+          <Property Name="stockInQty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="product" Relationship="Self.showcase_product_ibfk_3" FromRole="showcase_product" ToRole="product" />
+          <NavigationProperty Name="showcase" Relationship="Self.showcase_product_ibfk_2" FromRole="showcase_product" ToRole="showcase" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="staffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fulltime_parttime" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="staff_admin" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phonenumber" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="salary" Type="Int32" Nullable="false" />
+          <Property Name="basicPunchIn" Type="Time" Nullable="false" />
+          <Property Name="basicPunchOut" Type="Time" Nullable="false" />
+          <NavigationProperty Name="staff_attendance" Relationship="Self.staff_attendance_ibfk_1" FromRole="staff" ToRole="staff_attendance" />
+        </EntityType>
+        <EntityType Name="staff_attendance">
+          <Key>
+            <PropertyRef Name="staff_attendance_ID" />
+          </Key>
+          <Property Name="staff_attendance_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffID" Type="Int32" Nullable="false" />
+          <Property Name="attendanceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="attendance" Relationship="Self.staff_attendance_ibfk_2" FromRole="staff_attendance" ToRole="attendance" />
+          <NavigationProperty Name="staff" Relationship="Self.staff_attendance_ibfk_1" FromRole="staff_attendance" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="tenant">
+          <Key>
+            <PropertyRef Name="tenantID" />
+          </Key>
+          <Property Name="tenantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phonenumber" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="applyrentals" Relationship="Self.applyrental_ibfk_1" FromRole="tenant" ToRole="applyrental" />
+        </EntityType>
+        <Association Name="applyrental_ibfk_1">
+          <End Role="tenant" Type="Self.tenant" Multiplicity="1" />
+          <End Role="applyrental" Type="Self.applyrental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tenant">
+              <PropertyRef Name="tenantID" />
+            </Principal>
+            <Dependent Role="applyrental">
+              <PropertyRef Name="tenantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="applyrental_ibfk_2">
+          <End Role="showcase" Type="Self.showcase" Multiplicity="1" />
+          <End Role="applyrental" Type="Self.applyrental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="showcase">
+              <PropertyRef Name="showcaseID" />
+            </Principal>
+            <Dependent Role="applyrental">
+              <PropertyRef Name="showcaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="staff_attendance_ibfk_2">
+          <End Role="attendance" Type="Self.attendance" Multiplicity="1" />
+          <End Role="staff_attendance" Type="Self.staff_attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attendance">
+              <PropertyRef Name="attendanceID" />
+            </Principal>
+            <Dependent Role="staff_attendance">
+              <PropertyRef Name="attendanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="custorder_ibfk_1">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="custorder" Type="Self.custorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="custID" />
+            </Principal>
+            <Dependent Role="custorder">
+              <PropertyRef Name="custID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="orderproduct_ibfk_2">
+          <End Role="custorder" Type="Self.custorder" Multiplicity="1" />
+          <End Role="orderproduct" Type="Self.orderproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="custorder">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="orderproduct">
+              <PropertyRef Name="orderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="orderproduct_ibfk_3">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="orderproduct" Type="Self.orderproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="orderproduct">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="showcase_product_ibfk_3">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="showcase_product" Type="Self.showcase_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="showcase_product">
+              <PropertyRef Name="productID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="showcase_product_ibfk_2">
+          <End Role="showcase" Type="Self.showcase" Multiplicity="1" />
+          <End Role="showcase_product" Type="Self.showcase_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="showcase">
+              <PropertyRef Name="showcaseID" />
+            </Principal>
+            <Dependent Role="showcase_product">
+              <PropertyRef Name="showcaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="staff_attendance_ibfk_1">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="staff_attendance" Type="Self.staff_attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staffID" />
+            </Principal>
+            <Dependent Role="staff_attendance">
+              <PropertyRef Name="staffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="applyrentals" EntityType="Self.applyrental" />
+          <EntitySet Name="attendances" EntityType="Self.attendance" />
+          <EntitySet Name="customers" EntityType="Self.customer" />
+          <EntitySet Name="custorders" EntityType="Self.custorder" />
+          <EntitySet Name="orderproducts" EntityType="Self.orderproduct" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="showcases" EntityType="Self.showcase" />
+          <EntitySet Name="showcase_product" EntityType="Self.showcase_product" />
+          <EntitySet Name="staffs" EntityType="Self.staff" />
+          <EntitySet Name="staff_attendance" EntityType="Self.staff_attendance" />
+          <EntitySet Name="tenants" EntityType="Self.tenant" />
+          <AssociationSet Name="applyrental_ibfk_1" Association="Self.applyrental_ibfk_1">
+            <End Role="tenant" EntitySet="tenants" />
+            <End Role="applyrental" EntitySet="applyrentals" />
+          </AssociationSet>
+          <AssociationSet Name="applyrental_ibfk_2" Association="Self.applyrental_ibfk_2">
+            <End Role="showcase" EntitySet="showcases" />
+            <End Role="applyrental" EntitySet="applyrentals" />
+          </AssociationSet>
+          <AssociationSet Name="staff_attendance_ibfk_2" Association="Self.staff_attendance_ibfk_2">
+            <End Role="attendance" EntitySet="attendances" />
+            <End Role="staff_attendance" EntitySet="staff_attendance" />
+          </AssociationSet>
+          <AssociationSet Name="custorder_ibfk_1" Association="Self.custorder_ibfk_1">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="custorder" EntitySet="custorders" />
+          </AssociationSet>
+          <AssociationSet Name="orderproduct_ibfk_2" Association="Self.orderproduct_ibfk_2">
+            <End Role="custorder" EntitySet="custorders" />
+            <End Role="orderproduct" EntitySet="orderproducts" />
+          </AssociationSet>
+          <AssociationSet Name="orderproduct_ibfk_3" Association="Self.orderproduct_ibfk_3">
+            <End Role="product" EntitySet="products" />
+            <End Role="orderproduct" EntitySet="orderproducts" />
+          </AssociationSet>
+          <AssociationSet Name="showcase_product_ibfk_3" Association="Self.showcase_product_ibfk_3">
+            <End Role="product" EntitySet="products" />
+            <End Role="showcase_product" EntitySet="showcase_product" />
+          </AssociationSet>
+          <AssociationSet Name="showcase_product_ibfk_2" Association="Self.showcase_product_ibfk_2">
+            <End Role="showcase" EntitySet="showcases" />
+            <End Role="showcase_product" EntitySet="showcase_product" />
+          </AssociationSet>
+          <AssociationSet Name="staff_attendance_ibfk_1" Association="Self.staff_attendance_ibfk_1">
+            <End Role="staff" EntitySet="staffs" />
+            <End Role="staff_attendance" EntitySet="staff_attendance" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="applyrentals">
+            <EntityTypeMapping TypeName="Model.applyrental">
+              <MappingFragment StoreEntitySet="applyrental">
+                <ScalarProperty Name="applyRentalID" ColumnName="applyRentalID" />
+                <ScalarProperty Name="applyDate" ColumnName="applyDate" />
+                <ScalarProperty Name="showcaseID" ColumnName="showcaseID" />
+                <ScalarProperty Name="tenantID" ColumnName="tenantID" />
+                <ScalarProperty Name="rentStartDate" ColumnName="rentStartDate" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="approve" ColumnName="approve" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="attendances">
+            <EntityTypeMapping TypeName="Model.attendance">
+              <MappingFragment StoreEntitySet="attendance">
+                <ScalarProperty Name="attendanceID" ColumnName="attendanceID" />
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="basicPunchIn" ColumnName="basicPunchIn" />
+                <ScalarProperty Name="basicPunchOut" ColumnName="basicPunchOut" />
+                <ScalarProperty Name="punchIn" ColumnName="punchIn" />
+                <ScalarProperty Name="punchOut" ColumnName="punchOut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="Model.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="custID" ColumnName="custID" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="phonenum" ColumnName="phonenum" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="custorders">
+            <EntityTypeMapping TypeName="Model.custorder">
+              <MappingFragment StoreEntitySet="custorder">
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="custID" ColumnName="custID" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderproducts">
+            <EntityTypeMapping TypeName="Model.orderproduct">
+              <MappingFragment StoreEntitySet="orderproduct">
+                <ScalarProperty Name="order_product_ID" ColumnName="order_product_ID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="orderQTY" ColumnName="orderQTY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="Model.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="showcases">
+            <EntityTypeMapping TypeName="Model.showcase">
+              <MappingFragment StoreEntitySet="showcase">
+                <ScalarProperty Name="showcaseID" ColumnName="showcaseID" />
+                <ScalarProperty Name="rentCost" ColumnName="rentCost" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="location" ColumnName="location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="showcase_product">
+            <EntityTypeMapping TypeName="Model.showcase_product">
+              <MappingFragment StoreEntitySet="showcase_product">
+                <ScalarProperty Name="showcase_product_ID" ColumnName="showcase_product_ID" />
+                <ScalarProperty Name="showcaseID" ColumnName="showcaseID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="stockInDate" ColumnName="stockInDate" />
+                <ScalarProperty Name="stockInQty" ColumnName="stockInQty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staffs">
+            <EntityTypeMapping TypeName="Model.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+                <ScalarProperty Name="fulltime_parttime" ColumnName="fulltime_parttime" />
+                <ScalarProperty Name="staff_admin" ColumnName="staff_admin" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="basicPunchIn" ColumnName="basicPunchIn" />
+                <ScalarProperty Name="basicPunchOut" ColumnName="basicPunchOut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff_attendance">
+            <EntityTypeMapping TypeName="Model.staff_attendance">
+              <MappingFragment StoreEntitySet="staff_attendance">
+                <ScalarProperty Name="staff_attendance_ID" ColumnName="staff_attendance_ID" />
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+                <ScalarProperty Name="attendanceID" ColumnName="attendanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tenants">
+            <EntityTypeMapping TypeName="Model.tenant">
+              <MappingFragment StoreEntitySet="tenant">
+                <ScalarProperty Name="tenantID" ColumnName="tenantID" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
